@@ -15,10 +15,55 @@ body
 ===           NAV 						====
 ============================================*/
 
-nav
+nav a
 {
-	
+	position: relative;
+	top: 20px;
+	left: 450px;
+	z-index: 100;
+	display: inline-block;
+	float: left;
+	margin-right: 49px;
 }
+
+nav #nav_home
+{
+	background: url('../images/spritesheet.png') no-repeat -221px -39px;
+	width: 70px;
+	height: 18px;
+}
+	nav #nav_home:hover
+	{
+		background: url('../images/spritesheet.png') no-repeat -221px -74px;
+		width: 70px;
+		height: 18px;
+	}
+
+nav #nav_gallery
+{
+	background: url('../images/spritesheet.png') no-repeat -309px -39px;
+	width: 112px;
+	height: 18px;
+}
+	nav #nav_gallery:hover
+	{
+		background: url('../images/spritesheet.png') no-repeat -309px -74px;
+		width: 112px;
+		height: 18px;
+	}
+nav #nav_official_site
+{
+	background: url('../images/spritesheet.png') no-repeat -435px -39px;
+	width: 172px;
+	height: 18px;
+}
+	nav #nav_official_site:hover
+	{
+		background: url('../images/spritesheet.png') no-repeat -435px -74px;
+		width: 172px;
+		height: 18px;
+	}
+
 
 /* =========================================
 ===           CONTENT TEXT				====
