@@ -21,7 +21,7 @@ function drawBgImage(layer, path_to_image)
     {
         image.setImage(imageObj);
         image.setId('bg');
-        image.moveToBottom();
+        image.moveToTop();
         current_layer.draw()
     };
 
@@ -60,7 +60,7 @@ function changeBg(e, dragSrcEl)
     //         children[i].draw();
     //     }
     // }
-    drawBgImage()
+    drawBgImage(layer, dragSrcEl.src)
 }
 
 function addCharImg(e, dragSrcEl)
@@ -72,12 +72,10 @@ function addCharImg(e, dragSrcEl)
            
             dragBoundFunc: function (pos) {
                 var thisImg = this;
-                var half_imageX = thisImg.getWidth() / 2;
-                var half_imageY = thisImg.getHeight() / 2;
-                var bound_loX = frame_offsetX - half_imageX;
-                var bound_hiX = frame_offsetX + FRAME_WIDTH - half_imageX;
-                var bound_loY = frame_offsetY - half_imageY;
-                var bound_hiY = frame_offsetY + FRAME_HEIGHT - half_imageY;
+                var bound_loX = frame_offsetX ;
+                var bound_hiX = frame_offsetX + FRAME_WIDTH;
+                var bound_loY = frame_offsetY;
+                var bound_hiY = frame_offsetY + FRAME_HEIGHT;
                 if (pos.x < bound_loX || pos.x > bound_hiX || pos.y < bound_loY || pos.y > bound_hiY)
                 {
                     var tween = new Kinetic.Tween(
@@ -355,6 +353,7 @@ function drawBgImages()
 {
     for (var i =0; i < NUM_SCENES; i++ )
     {
+        goToLayer(i);
         bg_images[i] = drawBgImage(layer_array[i], bg_file_names[i]);
     }
 
