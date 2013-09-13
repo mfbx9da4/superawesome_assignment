@@ -1,0 +1,184 @@
+body	
+{
+	background-image: url('../assets/bg-home.png');
+	background-repeat: no-repeat;
+	margin: 0 auto;
+	background-position: top center;
+	overflow-y: scroll;
+	height: 1670px; 
+	overflow-x: hidden;
+}
+
+/* =========================================
+===           CANVAS					====
+============================================*/
+
+#canvas_container_container
+{
+	background-image: url('../images/canvasbg.png');
+	background-repeat: no-repeat;
+	margin: 0 auto;
+	width: 940px;
+	height: 830px;
+	position: relative;
+	top: 710px;
+}
+
+#canvas_container
+{
+	position: relative;
+	left: 220px;
+	top: 130px;
+	width: 640px;
+	height: 320px;
+	border-radius: 6px;
+	box-shadow: 0 0 10px 5px #ccc;
+}
+
+#canvas
+{
+}
+
+
+/* =========================================
+===           CHARS						====
+============================================*/
+
+#chars {
+    width: 180px;
+    height: 205px;
+    overflow: hidden;
+    position: absolute;
+    top: 410px;
+    left: 200px;
+}
+
+.char {
+    width:50px;
+    position: absolute;
+}
+
+.char_nav
+{
+	position: absolute;
+	top: 510px;
+	cursor: pointer;	
+}
+
+#shiftLeft
+{
+	left: 150px;
+}
+
+#shiftRight
+{
+	left: 370px;
+}
+
+/* =========================================
+===           BGS						====
+============================================*/
+
+#bgs {
+    width: 150px;
+    height: 185px;
+    overflow: hidden;
+    position: absolute;
+    top: 257px;
+    left: 30px;
+}
+
+.bg {
+    height:60px;
+    position: absolute;
+}
+
+.bg_nav
+{
+	position: absolute;
+	left: 85px;
+	cursor: pointer;	
+}
+
+#shiftUp
+{
+	top: 215px;
+}
+
+#shiftDown
+{
+	top: 445px;
+}
+
+/* =========================================
+===           SCENE NAV					====
+============================================*/
+#scene0
+{
+	background: url('../images/spritesheet.png') no-repeat -2px -199px;
+	display: inline-block; 
+	width: 108px;
+	height: 34px;
+	position: absolute;
+	top:-34px;
+	left:170px;
+	z-index: 30;
+}
+
+#scene1
+{
+	/*background: url('../images/spritesheet.png') no-repeat -114px -199px;*/
+	background: url('../images/spritesheet.png') no-repeat -114px -119px;
+	display: inline-block; 
+	width: 108px;
+	height: 34px;
+	position: absolute;
+	top:-34px;
+	left:283px;
+	z-index: 30;
+
+}
+
+#scene2
+{
+	/*background: url('../images/spritesheet.png') no-repeat -227px -199px;*/
+	background: url('../images/spritesheet.png') no-repeat -227px -119px;
+	display: inline-block; 
+	width: 108px;
+	height: 34px;
+	position: absolute;
+	top:-34px;
+	left:396px;
+	z-index: 30;
+
+}
+
+#scene3
+{
+	background: url('../images/spritesheet.png') no-repeat -341px -119px;
+	display: inline-block; 
+	width: 108px;
+	height: 34px;
+	position: absolute;
+	top:-34px;
+	left:509px;
+	z-index: 30;
+}
+
+
+/* =========================================
+===           STORY						====
+============================================*/
+
+#story_input
+{
+	position: absolute;
+	width: 335px;
+	height: 65px;
+	top: 490px;
+	left: 517px;
+	background-color: transparent;
+	border: none;
+
+}
+
