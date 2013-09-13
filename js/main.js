@@ -6,43 +6,61 @@ function log(str)
 
 function drawBgImage(layer, path_to_image)
 {
-    bgImg = new Image();
-    bgImg.onload = function() {
-        var kineticBgImg = new Kinetic.Image({
-          image: bgImg,
-          x: frame_offsetX,
-          y: frame_offsetY,
-          width: 640,
-          height: 240,
-          draggable: false
-        });
+    var image = new Kinetic.Image({
+            x: frame_offsetX,
+            y: frame_offsetY,
+            width: 640,
+            height: 240,
+            draggable: false
+            });
 
-        // add cursor styling
-        kineticBgImg.on('mouseover', function() {
-          document.body.style.cursor = 'default';
-        });
-        kineticBgImg.on('mouseout', function() {
-          document.body.style.cursor = 'default';
-        });
-
-        layer.add(kineticBgImg);
-        kineticBgImg.moveToBottom();
+    current_layer.add(image);
+    imageObj = new Image();
+    imageObj.src = path_to_image;
+    imageObj.onload = function()
+    {
+        image.setImage(imageObj);
+        image.setId('bg');
+        image.moveToBottom();
+        current_layer.draw()
     };
-    bgImg.src = path_to_image;
-    return bgImg;
+
+
+
+
+
+    // bgImg = new Image();
+    // bgImg.onload = function() {
+        
+    //     // add cursor styling
+    //     kineticBgImg.on('mouseover', function() {
+    //       document.body.style.cursor = 'default';
+    //     });
+    //     kineticBgImg.on('mouseout', function() {
+    //       document.body.style.cursor = 'default';
+    //     });
+
+    //     layer.add(kineticBgImg);
+    //     kineticBgImg.moveToBottom();
+    // };
+    // bgImg.src = path_to_image;
+    // return bgImg;
 }
 
 function changeBg(e, dragSrcEl)
 {
-    // var i = layer_array.indexOf(current_layer);
-    // log(bg_images[i].src);
-    // var img = new Image();
-    // img.onload = function () {
-    //     bg_images[i].image = img;
+    // var children = current_layer.getChildren();
+    // for (var i = 0; i < children.length; i++)
+    // {
+    //     log(children[i].getId());
+    //     if (children[i].getId() === 'bg')
+    //     {
+    //         children[i].getImage().src = dragSrcEl.src;
+    //         children[i].moveToBottom();
+    //         children[i].draw();
+    //     }
     // }
-    // img.src = dragSrcEl.src
-    // log(bg_images[i].src);
-
+    drawBgImage()
 }
 
 function addCharImg(e, dragSrcEl)
@@ -51,7 +69,6 @@ function addCharImg(e, dragSrcEl)
            draggable : true,
            x: frame_offsetX + 10,
            y: frame_offsetY + 10,
-           name : "bg",
            
             dragBoundFunc: function (pos) {
                 var thisImg = this;
@@ -225,7 +242,6 @@ function goToLayer(num)
     layer_array[num].show();
     current_layer = layer_array[num];
     current_layer.draw();
-    current_layer.show();
     stage.draw();
 }
 
@@ -339,7 +355,7 @@ function drawBgImages()
 {
     for (var i =0; i < NUM_SCENES; i++ )
     {
-        bg_images[i] = drawBgImage(layer_array[i], 'images/bgs/blue.jpg');
+        bg_images[i] = drawBgImage(layer_array[i], bg_file_names[i]);
     }
 
 }
@@ -360,13 +376,19 @@ var sprite_map = [
     {"sel":"-341px -199px", "hov":"-341px -159px", "std":"-341px -119px"}
     ]
 var bg_images = []
+var bg_file_names = [
+    'images/bgs/blue.jpg',
+    'images/bgs/orange.jpg',
+    'images/bgs/purple.jpg',
+    'images/bgs/green.jpg'
+    ]
 
 
 window.onload = function(){
     // === SETUP CANVAS ===
     makeStageAndLayers();
-    drawBgImages();
     goToLayer(0);
+    drawBgImages();
 
     repositionCanvas();
     // drawBorders();
