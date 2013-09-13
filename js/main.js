@@ -4,8 +4,9 @@ function log(str)
 }
 
 
-function drawBgImage(layer, path_to_image)
+function drawBgImage(path_to_image)
 {
+    log(path_to_image);
     var image = new Kinetic.Image({
             x: frame_offsetX,
             y: frame_offsetY,
@@ -21,11 +22,9 @@ function drawBgImage(layer, path_to_image)
     {
         image.setImage(imageObj);
         image.setId('bg');
-        image.moveToTop();
+        // image.moveToTop();
         current_layer.draw()
     };
-
-
 
 
 
@@ -60,7 +59,7 @@ function changeBg(e, dragSrcEl)
     //         children[i].draw();
     //     }
     // }
-    drawBgImage(layer, dragSrcEl.src)
+    drawBgImage(dragSrcEl.src)
 }
 
 function addCharImg(e, dragSrcEl)
@@ -112,7 +111,7 @@ function addCharImg(e, dragSrcEl)
 
 
 
-function allowDragChars()
+function listenForImageChoice()
 {
     stage.add(current_layer);
     var con = stage.getContainer();    
@@ -128,6 +127,7 @@ function allowDragChars()
            dragSrcEl = this;
     });
 
+    // allow bg click
     $(".bg").on('click',function(e){
            dragSrcEl = this;
            changeBg(e, dragSrcEl);
@@ -152,6 +152,7 @@ function repositionCanvas ()
 
 function drawBorders ()
 {
+    // for debugging purposes
     frame = new Kinetic.Rect({
         x: frame_offsetX,
         y: frame_offsetY,
@@ -340,7 +341,6 @@ function makeStageAndLayers ()
         width: STAGE_WIDTH,
         height: STAGE_HEIGHT
       });
-    layer_array = []
     for (var i = 0; i < NUM_SCENES; i ++)
     {
         var new_layer = new Kinetic.Layer();
@@ -354,7 +354,7 @@ function drawBgImages()
     for (var i =0; i < NUM_SCENES; i++ )
     {
         goToLayer(i);
-        bg_images[i] = drawBgImage(layer_array[i], bg_file_names[i]);
+        bg_images[i] = drawBgImage(bg_file_names[i]);
     }
 
 }
@@ -372,26 +372,22 @@ var sprite_map = [
     {"sel":"-2px -199px", "hov":"-2px -159px", "std":"-2px -119px"},
     {"sel":"-114px -199px", "hov":"-114px -159px", "std":"-114px -119px"},
     {"sel":"-227px -199px", "hov":"-227px -159px", "std":"-227px -119px"},
-    {"sel":"-341px -199px", "hov":"-341px -159px", "std":"-341px -119px"}
-    ]
-var bg_images = []
-var bg_file_names = [
-    'images/bgs/blue.jpg',
-    'images/bgs/orange.jpg',
-    'images/bgs/purple.jpg',
-    'images/bgs/green.jpg'
-    ]
+    {"sel":"-341px -199px", "hov":"-341px -159px", "std":"-341px -119px"}];
+var bg_images = [];
+var layer_array = [];
+var bg_file_names = ['images/bgs/blue.jpg', 'images/bgs/orange.jpg',
+    'images/bgs/purple.jpg', 'images/bgs/green.jpg'];
 
 
 window.onload = function(){
     // === SETUP CANVAS ===
     makeStageAndLayers();
-    goToLayer(0);
     drawBgImages();
+    goToLayer(0);
 
     repositionCanvas();
     // drawBorders();
-    allowDragChars();
+    listenForImageChoice();
     goToLayer(0);
 
 
