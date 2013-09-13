@@ -8,7 +8,7 @@ function drawBgImage(layer, path_to_image)
 {
     bgImg = new Image();
     bgImg.onload = function() {
-        kineticBgImg = new Kinetic.Image({
+        var kineticBgImg = new Kinetic.Image({
           image: bgImg,
           x: frame_offsetX,
           y: frame_offsetY,
@@ -19,7 +19,7 @@ function drawBgImage(layer, path_to_image)
 
         // add cursor styling
         kineticBgImg.on('mouseover', function() {
-          document.body.style.cursor = 'pointer';
+          document.body.style.cursor = 'default';
         });
         kineticBgImg.on('mouseout', function() {
           document.body.style.cursor = 'default';
@@ -34,10 +34,14 @@ function drawBgImage(layer, path_to_image)
 
 function changeBg(e, dragSrcEl)
 {
-    var i = layer_array.indexOf(current_layer);
-    log(bg_images[i].src);
-    bg_images[i].src = dragSrcEl.src;
-    log(bg_images[i].src);
+    // var i = layer_array.indexOf(current_layer);
+    // log(bg_images[i].src);
+    // var img = new Image();
+    // img.onload = function () {
+    //     bg_images[i].image = img;
+    // }
+    // img.src = dragSrcEl.src
+    // log(bg_images[i].src);
 
 }
 
