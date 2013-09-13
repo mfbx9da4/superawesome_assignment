@@ -22,43 +22,21 @@ function drawBgImage(path_to_image)
     {
         image.setImage(imageObj);
         image.setId('bg');
-        // image.moveToTop();
+        image.moveToBottom();
         current_layer.draw()
     };
-
-
-
-    // bgImg = new Image();
-    // bgImg.onload = function() {
-        
-    //     // add cursor styling
-    //     kineticBgImg.on('mouseover', function() {
-    //       document.body.style.cursor = 'default';
-    //     });
-    //     kineticBgImg.on('mouseout', function() {
-    //       document.body.style.cursor = 'default';
-    //     });
-
-    //     layer.add(kineticBgImg);
-    //     kineticBgImg.moveToBottom();
-    // };
-    // bgImg.src = path_to_image;
-    // return bgImg;
 }
 
 function changeBg(e, dragSrcEl)
 {
-    // var children = current_layer.getChildren();
-    // for (var i = 0; i < children.length; i++)
-    // {
-    //     log(children[i].getId());
-    //     if (children[i].getId() === 'bg')
-    //     {
-    //         children[i].getImage().src = dragSrcEl.src;
-    //         children[i].moveToBottom();
-    //         children[i].draw();
-    //     }
-    // }
+    var children = current_layer.getChildren();
+    for (var i = 0; i < children.length; i++)
+    {
+        if (children[i].getZIndex() === 0)
+        {
+            children[i].destroy()
+        }
+    }
     drawBgImage(dragSrcEl.src)
 }
 
