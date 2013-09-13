@@ -7,6 +7,57 @@ body
 	overflow-y: scroll;
 	height: 1670px; 
 	overflow-x: hidden;
+	font-family: Arial;
+	line-height: 1.5em;
+}
+
+/* =========================================
+===           NAV 						====
+============================================*/
+
+nav
+{
+	
+}
+
+/* =========================================
+===           CONTENT TEXT				====
+============================================*/
+a
+{
+	color: orange;
+	font-weight: bold;
+	text-decoration: none;
+}
+	a:hover
+	{
+		color: darkorange;
+	}
+#intro
+{
+	position: relative;
+	width: 940px;
+	top: 470px;
+	margin: 0 auto;
+}
+
+#instructions
+{
+	position: relative;
+	width: 540px;
+	top: 570px;
+	left: 133px;
+	margin: 0 auto;
+	text-align: right;	
+}
+
+#finished_text
+{
+	position: relative;
+	width: 522px;
+	top: 445px;
+	left: -160px;
+	margin: 0 auto;	
 }
 
 /* =========================================
@@ -15,13 +66,13 @@ body
 
 #canvas_container_container
 {
+	position: relative;
+	top: 565px;
 	background-image: url('../images/canvasbg.png');
 	background-repeat: no-repeat;
 	margin: 0 auto;
 	width: 940px;
 	height: 830px;
-	position: relative;
-	top: 710px;
 }
 
 #canvas_container
@@ -179,6 +230,28 @@ body
 	left: 517px;
 	background-color: transparent;
 	border: none;
+	font-family: Arial;
+	color: gray;
+	padding-right: 6px;
+}
+	#story_input:focus
+	{
+		outline: none;
+		color: black;
+	}
 
+#add_text
+{
+	position: absolute;
+	width: 106px;
+	height: 31px;
+	top: 542px;
+	left: 755px;
+	background: url('../images/spritesheet.png') no-repeat -100px -33px;
 }
 
+	#add_text:hover
+	{
+		background: url('../images/spritesheet.png') no-repeat -100px -66px;
+		cursor: pointer;
+	}

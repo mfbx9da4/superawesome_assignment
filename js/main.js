@@ -6,7 +6,6 @@ function log(str)
 
 function drawBgImage(path_to_image)
 {
-    log(path_to_image);
     var image = new Kinetic.Image({
             x: frame_offsetX,
             y: frame_offsetY,
@@ -27,7 +26,7 @@ function drawBgImage(path_to_image)
     };
 }
 
-function changeBg(e, dragSrcEl)
+function changeBg(e, srcEl)
 {
     var children = current_layer.getChildren();
     for (var i = 0; i < children.length; i++)
@@ -37,10 +36,10 @@ function changeBg(e, dragSrcEl)
             children[i].destroy()
         }
     }
-    drawBgImage(dragSrcEl.src)
+    drawBgImage(srcEl.src)
 }
 
-function addCharImg(e, dragSrcEl)
+function addCharImg(e, srcEl)
 {
     var image = new Kinetic.Image({
            draggable : true,
@@ -74,12 +73,11 @@ function addCharImg(e, dragSrcEl)
 
     current_layer.add(image);
     imageObj = new Image();
-    imageObj.src = dragSrcEl.src;
+    imageObj.src = srcEl.src;
     imageObj.onload = function()
     {
-        factor = 0.07;
-        var width = imageObj.width * factor;
-        var height = imageObj.height * factor;
+        var width = imageObj.width * CHAR_SCALE_FACTOR;
+        var height = imageObj.height * CHAR_SCALE_FACTOR;
         image.setSize(width, height);
         image.setImage(imageObj)
         image.moveToTop();
@@ -89,7 +87,7 @@ function addCharImg(e, dragSrcEl)
 
 
 
-function listenForImageChoice()
+function assignHandlers()
 {
     stage.add(current_layer);
     var con = stage.getContainer();    
@@ -98,25 +96,31 @@ function listenForImageChoice()
         e.preventDefault(); //@important
     });
 
-    var dragSrcEl = null;
+    var srcEl = null;
 
     //image
     $(".char, .bg").on('dragstart',function(e){
-           dragSrcEl = this;
+           srcEl = this;
     });
 
     // allow bg click
     $(".bg").on('click',function(e){
-           dragSrcEl = this;
-           changeBg(e, dragSrcEl);
+           srcEl = this;
+           changeBg(e, srcEl);
     });
     
     //insert image to stage
     con.addEventListener('drop',function(e){
-        if (dragSrcEl.className == 'char')
-            addCharImg(e, dragSrcEl);
-        else if (dragSrcEl.className == 'bg')
-            changeBg(e, dragSrcEl);
+        if (srcEl.className == 'char')
+            addCharImg(e, srcEl);
+        else if (srcEl.className == 'bg')
+            changeBg(e, srcEl);
+    });
+
+    $("#add_text").on('click',function(e){
+           srcEl = this;
+           var text_area = document.getElementById('story_input');
+           changeTextArea(e, text_area);
     });
 }
 
@@ -178,7 +182,7 @@ function positionBgs ()
     });
 }
 
-function setUpShift()
+function setUpShiftImageChoice()
 {
     $("#shiftRight").on("click", function () {
         $('#chars').children().each(function(){
@@ -202,7 +206,7 @@ function setUpShift()
     }); 
 }
 
-function getStyle(el,styleProp)
+function getStyle(el, styleProp)
 {
     if (el.currentStyle)
         return el.currentStyle[styleProp];
@@ -337,10 +341,64 @@ function drawBgImages()
 
 }
 
-var STAGE_WIDTH = 640*2;
-var STAGE_HEIGHT = 240*2;
+function drawTextArea (scene_text)
+{
+    var rect = new Kinetic.Rect({
+            x: frame_offsetX,
+            y: frame_offsetY + FRAME_HEIGHT,
+            width: FRAME_WIDTH,
+            height: TEXT_AREA_HEIGHT,
+            fill: 'black'
+          });
+         
+        var text = new Kinetic.Text({
+            x: frame_offsetX,
+            y: frame_offsetY + FRAME_HEIGHT,
+            width: FRAME_WIDTH,
+            height: TEXT_AREA_HEIGHT,
+            text: scene_text,
+            fontSize: 15,
+            fontFamily: 'Arial',
+            fill: '#fff',
+            padding: 14,
+            align: 'left'
+          });
+        current_layer.add(rect);
+        current_layer.add(text);
+        current_layer.draw();
+}
+
+function drawTextAreas ()
+{
+    for (var i =0; i < NUM_SCENES; i++ )
+    {
+        goToLayer(i);
+        var scene_text = (i == 0 ? "Only the best story will win the Grand Prize, so think about your story before you submit your scenes! Roughly 3 lines of text be displayed maximum. Only the best story will win the Grand Prize, so think about your story before you submit your scenes! Roughly 3 lines of text be displayed maximum." : "");
+        drawTextArea(scene_text);
+    }
+}
+
+function changeTextArea(e, srcEl)
+{
+    var children = current_layer.getChildren();
+    for (var i = 0; i < children.length; i++)
+    {
+        log(children[i].className)
+        if (children[i].className == 'Text' || children[i].className == 'Rect')
+        {
+            children[i].destroy()
+            log(children)
+        }
+    }
+    drawTextArea(srcEl.value)
+}
+
+var CHAR_SCALE_FACTOR = 0.07;
+var STAGE_WIDTH = 640 * 2;
+var STAGE_HEIGHT = 240 * 2;
 var FRAME_WIDTH = 640;
 var FRAME_HEIGHT = 240;
+var TEXT_AREA_HEIGHT = 80;
 var frame_offsetX = STAGE_WIDTH * 0.25;
 var frame_offsetY = STAGE_HEIGHT * 0.25;
 var char_padding = 60;
@@ -361,18 +419,18 @@ window.onload = function(){
     // === SETUP CANVAS ===
     makeStageAndLayers();
     drawBgImages();
-    goToLayer(0);
-
+    drawTextAreas();
     repositionCanvas();
+    assignHandlers();
     // drawBorders();
-    listenForImageChoice();
+
     goToLayer(0);
 
 
     // === SETUP IMAGE CHOICE NAVS ===
     positionChars();
     positionBgs();
-    setUpShift();
+    setUpShiftImageChoice();
 
     // === SETUP SCENE NAV ===
     setUpHoverStyling();

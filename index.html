@@ -14,6 +14,11 @@
     <script src="js/main.js" defer="defer"></script>
 </head>
 <body>
+<nav>
+    <div></div>
+</nav>
+<div id="intro">Introducing <a href="#">Disney Infinity</a> - the new video game where a spark of imaginationunlocks the freedom to play with some of your favourite Disney characters and worlds like never before! Woody and Buzz, Jack Sparrow, The Incredibles, Sully and Mike, Lightning McQueen and many more are yours to command as you create your own epic Disney adventures.</div>
+<div id="instructions">Set the scenem the characters and tell us what's happening to arn loads of swapits plus the chance to win a <a href="#">Nintendo 3DS!</a>  Drag and drop on the canvas below and make up to 4 scenes for your story! Each sene will give you even more swapits!</div>
 <div id="canvas_container_container">
     <div id="canvas_container">
         <div id="scene_nav">
@@ -70,8 +75,12 @@
         onmouseout="this.src='images/right2.png'" src="images/right2.png"/>
     </div>
 
-    <textarea id="story_input"></textarea>
+    <div id="story_text">
+        <textarea id="story_input">Only the best story will win the Grand Prize, so think about your story before you submit your scenes! Roughly 3 lines of text be displayed maximum.</textarea>
+        <div id="add_text"></div>
+    </div>
 </div>
+<div id="finished_text">Click <a href="#">"preview"</a> to make sure you're happy with it and if you are, submit it for entry into the competition and you could be in with a chance of winning a <a href="#">Nintendo 3DS XL, Disney Infinity Starter Pack</a> and <a href="#">5,000 swapits!</a> </div>
 
 
      
