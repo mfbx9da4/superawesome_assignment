@@ -15,15 +15,22 @@ body
 ===           NAV 						====
 ============================================*/
 
+nav ul
+{
+	width: 461px;
+	margin: 8px auto;
+}
+
+nav li
+{
+	display: inline-block;
+	list-style: none;
+	text-align: center;
+	padding: 10px;
+}
 nav a
 {
-	position: relative;
-	top: 20px;
-	left: 450px;
-	z-index: 100;
 	display: inline-block;
-	float: left;
-	margin-right: 49px;
 }
 
 nav #nav_home
@@ -82,7 +89,7 @@ a
 {
 	position: relative;
 	width: 940px;
-	top: 470px;
+	top: 419px;
 	margin: 0 auto;
 }
 
@@ -90,7 +97,7 @@ a
 {
 	position: relative;
 	width: 540px;
-	top: 570px;
+	top: 507px;
 	left: 133px;
 	margin: 0 auto;
 	text-align: right;	
@@ -100,7 +107,7 @@ a
 {
 	position: relative;
 	width: 522px;
-	top: 445px;
+	top: 391px;
 	left: -160px;
 	margin: 0 auto;	
 }
@@ -112,7 +119,7 @@ a
 #canvas_container_container
 {
 	position: relative;
-	top: 565px;
+	top: 512px;
 	background-image: url('../images/canvasbg.png');
 	background-repeat: no-repeat;
 	margin: 0 auto;
@@ -131,10 +138,21 @@ a
 	box-shadow: 0 0 10px 5px #ccc;
 }
 
-#canvas
+#clear
 {
+	position: absolute;
+	top: 4px;
+	left: 595px;
+	z-index: 99;
+	background: url('../images/spritesheet.png') no-repeat -4px -32px;
+	width: 42px;
+	height: 42px;
 }
 
+	#clear:hover
+	{
+		background: url('../images/spritesheet.png') no-repeat -48px -32px;
+	}
 
 /* =========================================
 ===           CHARS						====

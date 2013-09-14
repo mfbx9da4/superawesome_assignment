@@ -49,9 +49,9 @@ function addCharImg(e, srcEl)
             dragBoundFunc: function (pos) {
                 var thisImg = this;
                 var bound_loX = frame_offsetX ;
-                var bound_hiX = frame_offsetX + FRAME_WIDTH;
+                var bound_hiX = frame_offsetX + FRAME_WIDTH - thisImg.getWidth();
                 var bound_loY = frame_offsetY;
-                var bound_hiY = frame_offsetY + FRAME_HEIGHT;
+                var bound_hiY = frame_offsetY + FRAME_HEIGHT - thisImg.getHeight();
                 if (pos.x < bound_loX || pos.x > bound_hiX || pos.y < bound_loY || pos.y > bound_hiY)
                 {
                     var tween = new Kinetic.Tween(
