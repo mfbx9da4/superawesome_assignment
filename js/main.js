@@ -20,7 +20,7 @@ function drawBgImage(path_to_image)
     imageObj.onload = function()
     {
         image.setImage(imageObj);
-        image.setId('bg');
+        image.setName('bg');
         image.moveToBottom();
         current_layer.draw()
     };
@@ -96,17 +96,13 @@ function removeAllChars()
 
 function renderImages()
 {
-    var layer_image = new Image();
-    layer_image.onload = function ()
+    var scene_imgs = $(".scene_image");
+    for (var i = 0; i < NUM_SCENES; i++)
     {
-        current_layer.toDataURL({
-              callback: function(dataUrl) {
-                console.log(dataUrl);
-                layer_image.src = dataUrl;
-              }
-            });
+        goToLayer(i);
+        scene_imgs[i].src = current_layer.toDataURL();
     }
-    // $('#preview_content').css({background: })
+
 }
 
 function assignHandlers()
@@ -196,17 +192,6 @@ function drawBorders ()
     current_layer.add(frame);
 }
 
-function positionChars ()
-{
-    $(function () {
-        var i = 0;
-        $('#chars').children().each(function(){
-            var offsetY = ($(this).parent().height() - $(this).height()) /2;
-            $(this).css({left:$(this).position().left + i, top: offsetY});
-            i = i + char_padding;
-        });
-    });
-}
 
 function positionBgs ()
 {
@@ -333,26 +318,6 @@ function setUpHoverStyling()
         });
 }
 
-function setUpRender ()
-{
-    document.getElementById('save').addEventListener('click', function() {
-            /*
-             * since the stage toDataURL() method is asynchronous, we need
-             * to provide a callback
-             */
-            stage.toDataURL({
-              callback: function(dataUrl) {
-                /*
-                 * here you can do anything you like with the data url.
-                 * In this tutorial we'll just open the url with the browser
-                 * so that you can see the result as an image
-                 */
-                window.open(dataUrl);
-              }
-            });
-          }, false);
-}
-
 function makeStageAndLayers ()
 {
     stage = new Kinetic.Stage({
@@ -430,14 +395,32 @@ function changeTextArea(e, new_text)
     drawTextArea(new_text)
 }
 
+function loadAndPositionChars()
+{
+    var chars = $('.char');
+    j = 0;
+    for (var i = 0; i < chars.length; i ++)
+    {
+        chars[i].src = char_file_names[i];
+        log(chars[i]);
+        chars[i].onload = function ()
+        {
+            var offsetY = ($(this).parent().height() - $(this).height()) /2;
+            $(this).css({left:$(this).position().left + j, top: offsetY, visibility: 'visible'});
+            j = j + char_padding;
+        }
+    }
+}
+
+
 var CHAR_SCALE_FACTOR = 0.07;
-var STAGE_WIDTH = 640 * 2;
-var STAGE_HEIGHT = 240 * 2;
 var FRAME_WIDTH = 640;
 var FRAME_HEIGHT = 240;
 var TEXT_AREA_HEIGHT = 80;
-var frame_offsetX = STAGE_WIDTH * 0.25;
-var frame_offsetY = STAGE_HEIGHT * 0.25;
+var STAGE_WIDTH = FRAME_WIDTH;
+var STAGE_HEIGHT = FRAME_HEIGHT + TEXT_AREA_HEIGHT;
+var frame_offsetX = 0;
+var frame_offsetY = 0;
 var char_padding = 60;
 var bg_padding = 65;
 var NUM_SCENES = 4;
@@ -448,11 +431,37 @@ var sprite_map = [
     {"sel":"-341px -199px", "hov":"-341px -159px", "std":"-341px -119px"}];
 var bg_images = [];
 var layer_array = [];
-var bg_file_names = ['./images/bgs/blue.jpg', './images/bgs/orange.jpg',
-    './images/bgs/purple.jpg', './images/bgs/green.jpg'];
-
+var bg_file_names = ['/images/bgs/blue.jpg', '/images/bgs/orange.jpg',
+    '/images/bgs/purple.jpg', '/images/bgs/green.jpg'];
+var char_file_names = [
+    '/images/chars/Syndrome.png',
+    '/images/chars/Mike.png',
+    '/images/chars/Edna.png',
+    '/images/chars/DavyJones.png',
+    '/images/chars/Barbosa.png',
+    '/images/chars/Holly.png',
+    '/images/chars/LoneRanger.png',
+    '/images/chars/JackSkellington.png',
+    '/images/chars/Bob_Flying.png',
+    '/images/chars/Ralph.png',
+    '/images/chars/Buzz.png',
+    '/images/chars/Mater.png',
+    '/images/chars/Dash.png',
+    '/images/chars/CaptainJack.png',
+    '/images/chars/Helen.png',
+    '/images/chars/Phineas.png',
+    '/images/chars/Francesco.png',
+    '/images/chars/Violet_2.png',
+    '/images/chars/Jessie.png',
+    '/images/chars/Perry.png',
+    '/images/chars/Gibbs.png',
+    '/images/chars/Woody.png',
+    '/images/chars/Sully.png',
+    '/images/chars/Tonto.png',
+    '/images/chars/McQueen.png']
 
 window.onload = function(){
+
     // === SETUP CANVAS ===
     makeStageAndLayers();
     drawBgImages();
@@ -465,7 +474,7 @@ window.onload = function(){
 
 
     // === SETUP IMAGE CHOICE NAVS ===
-    positionChars();
+    loadAndPositionChars();
     positionBgs();
     setUpShiftImageChoice();
 
