@@ -11,6 +11,7 @@
 
     </script>
     <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.6.0.min.js"></script>
+    <script src="js/popup_overlay.js"></script>
     <script src="js/main.js" defer="defer"></script>
 </head>
 <body>
@@ -50,31 +51,31 @@
         <img id="shiftLeft" class="char_nav"  onmouseover="this.src='images/left.png'" 
         onmouseout="this.src='images/left2.png'" src="images/left2.png"/>
         <div id="chars">
-            <img class="char" src="images/chars/Syndrome.png" draggable="true">
-            <img class="char" src="images/chars/Mike.png" draggable="true">
-            <img class="char" src="images/chars/Edna.png" draggable="true">
-            <img class="char" src="images/chars/DavyJones.png" draggable="true">
-            <img class="char" src="images/chars/Barbosa.png" draggable="true">
-            <img class="char" src="images/chars/Holly.png" draggable="true">
-            <img class="char" src="images/chars/LoneRanger.png" draggable="true">
-            <img class="char" src="images/chars/JackSkellington.png" draggable="true">
-            <img class="char" src="images/chars/Bob_Flying.png" draggable="true">
-            <img class="char" src="images/chars/Ralph.png" draggable="true">
-            <img class="char" src="images/chars/Buzz.png" draggable="true">
-            <img class="char" src="images/chars/Mater.png" draggable="true">
-            <img class="char" src="images/chars/Dash.png" draggable="true">
-            <img class="char" src="images/chars/CaptainJack.png" draggable="true">
-            <img class="char" src="images/chars/Helen.png" draggable="true">
-            <img class="char" src="images/chars/Phineas.png" draggable="true">
-            <img class="char" src="images/chars/Francesco.png" draggable="true">
-            <img class="char" src="images/chars/Violet_2.png" draggable="true">
-            <img class="char" src="images/chars/Jessie.png" draggable="true">
-            <img class="char" src="images/chars/Perry.png" draggable="true">
-            <img class="char" src="images/chars/Gibbs.png" draggable="true">
-            <img class="char" src="images/chars/Woody.png" draggable="true">
-            <img class="char" src="images/chars/Sully.png" draggable="true">
-            <img class="char" src="images/chars/Tonto.png" draggable="true">
-            <img class="char" src="images/chars/McQueen.png" draggable="true">
+            <img class="char" src="./images/chars/Syndrome.png" draggable="true">
+            <img class="char" src="./images/chars/Mike.png" draggable="true">
+            <img class="char" src="./images/chars/Edna.png" draggable="true">
+            <img class="char" src="./images/chars/DavyJones.png" draggable="true">
+            <img class="char" src="./images/chars/Barbosa.png" draggable="true">
+            <img class="char" src="./images/chars/Holly.png" draggable="true">
+            <img class="char" src="./images/chars/LoneRanger.png" draggable="true">
+            <img class="char" src="./images/chars/JackSkellington.png" draggable="true">
+            <img class="char" src="./images/chars/Bob_Flying.png" draggable="true">
+            <img class="char" src="./images/chars/Ralph.png" draggable="true">
+            <img class="char" src="./images/chars/Buzz.png" draggable="true">
+            <img class="char" src="./images/chars/Mater.png" draggable="true">
+            <img class="char" src="./images/chars/Dash.png" draggable="true">
+            <img class="char" src="./images/chars/CaptainJack.png" draggable="true">
+            <img class="char" src="./images/chars/Helen.png" draggable="true">
+            <img class="char" src="./images/chars/Phineas.png" draggable="true">
+            <img class="char" src="./images/chars/Francesco.png" draggable="true">
+            <img class="char" src="./images/chars/Violet_2.png" draggable="true">
+            <img class="char" src="./images/chars/Jessie.png" draggable="true">
+            <img class="char" src="./images/chars/Perry.png" draggable="true">
+            <img class="char" src="./images/chars/Gibbs.png" draggable="true">
+            <img class="char" src="./images/chars/Woody.png" draggable="true">
+            <img class="char" src="./images/chars/Sully.png" draggable="true">
+            <img class="char" src="./images/chars/Tonto.png" draggable="true">
+            <img class="char" src="./images/chars/McQueen.png" draggable="true">
         </div>
         <img id="shiftRight" class="char_nav" onmouseover="this.src='images/right.png'" 
         onmouseout="this.src='images/right2.png'" src="images/right2.png"/>
@@ -84,11 +85,20 @@
         <textarea id="story_input">Only the best story will win the Grand Prize, so think about your story before you submit your scenes! Roughly 3 lines of text be displayed maximum.</textarea>
         <div id="add_text"></div>
     </div>
+        <!-- Add a div which will open the modal -->
+      <div class="preview_open"></div>
+
+      <!-- Add content to modal -->
+      <div id="preview">
+        <button class="preview_close">Close</button>
+        <div id="preview_content" style="width: 50px; height: 50px; background-color: red;"></div>
+      </div>
+
+
+
 </div>
 <div id="finished_text">Click <a href="#">"preview"</a> to make sure you're happy with it and if you are, submit it for entry into the competition and you could be in with a chance of winning a <a href="#">Nintendo 3DS XL, Disney Infinity Starter Pack</a> and <a href="#">5,000 swapits!</a> </div>
 
-
-     
 </body>
 </html>
 

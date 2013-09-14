@@ -152,6 +152,7 @@ a
 	#clear:hover
 	{
 		background: url('../images/spritesheet.png') no-repeat -48px -32px;
+		cursor: pointer;
 	}
 
 /* =========================================
@@ -318,3 +319,49 @@ a
 		background: url('../images/spritesheet.png') no-repeat -100px -66px;
 		cursor: pointer;
 	}
+
+
+/* =========================================
+===           PREVIEW					====
+============================================*/
+
+.preview_open
+{
+	position: absolute;
+	top: 740px;
+	left:682px;
+	background: url('../images/spritesheet.png') no-repeat -7px -7px;
+	width: 118px;
+	height: 18px;
+}
+
+	.preview_open:hover
+	{
+		background: url('../images/spritesheet.png') no-repeat -136px -7px;
+		cursor: pointer;
+	}
+
+#preview
+{
+	width: 700px;
+	height: 500px;
+	background: #fff;
+	border-radius: 6px;
+}
+
+/* =========================================
+===           POPUP					====
+============================================*/
+
+.popup_background {
+    z-index: 2000; /* any number */
+  }
+  .popup_wrapper {
+    z-index: 2001; /* any number + 1 */
+  }
+  /* Add inline-block support for IE7 */
+  .popup_align,
+  .popup_content {
+    *display: inline;
+    *zoom: 1;
+  }

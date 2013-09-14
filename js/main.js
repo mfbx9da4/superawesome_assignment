@@ -42,10 +42,10 @@ function changeBg(e, srcEl)
 function addCharImg(e, srcEl)
 {
     var image = new Kinetic.Image({
-           draggable : true,
-           x: frame_offsetX + 10,
-           y: frame_offsetY + 10,
-           
+            draggable : true,
+            x: frame_offsetX + 10,
+            y: frame_offsetY + 10,
+            name : 'character',
             dragBoundFunc: function (pos) {
                 var thisImg = this;
                 var bound_loX = frame_offsetX ;
@@ -85,10 +85,46 @@ function addCharImg(e, srcEl)
     };
 }
 
+function removeAllChars()
+{
+    var chars = current_layer.get('.character');
+    chars.each( function (charImg){
+        charImg.remove();
+    });
+    current_layer.draw();
+}
 
+function renderImages()
+{
+    var layer_image = new Image();
+    layer_image.onload = function ()
+    {
+        current_layer.toDataURL({
+              callback: function(dataUrl) {
+                console.log(dataUrl);
+                layer_image.src = dataUrl;
+              }
+            });
+    }
+    // $('#preview_content').css({background: })
+}
 
 function assignHandlers()
 {
+    //bind clear canvas
+    $("#clear").on('click', function(e){
+        removeAllChars();
+        changeTextArea(e, '');
+    });
+    
+    //bind clear canvas
+    $(".preview_open").on('click', function(e){
+        renderImages();
+    });
+
+    //bind popup
+    $('#preview').popup();
+
     stage.add(current_layer);
     var con = stage.getContainer();    
 
@@ -98,18 +134,18 @@ function assignHandlers()
 
     var srcEl = null;
 
-    //image
+    // bind bg and char drag
     $(".char, .bg").on('dragstart',function(e){
            srcEl = this;
     });
 
-    // allow bg click
+    // bind bg click
     $(".bg").on('click',function(e){
            srcEl = this;
            changeBg(e, srcEl);
     });
     
-    //insert image to stage
+    //insert char to stage
     con.addEventListener('drop',function(e){
         if (srcEl.className == 'char')
             addCharImg(e, srcEl);
@@ -117,19 +153,20 @@ function assignHandlers()
             changeBg(e, srcEl);
     });
 
+    // bind add text to stage
     $("#add_text").on('click',function(e){
            srcEl = this;
-           var text_area = document.getElementById('story_input');
-           changeTextArea(e, text_area);
+           var new_text = document.getElementById('story_input').value;
+           changeTextArea(e, new_text);
     });
 }
 
 function repositionCanvas ()
 {
-  $("#canvas").css({
-      left: -frame_offsetX,
-      top: -frame_offsetY,
-      position:'absolute'});
+    $("#canvas").css({
+        left: -frame_offsetX,
+        top: -frame_offsetY,
+        position:'absolute'});
 }
 
 function drawBorders ()
@@ -378,7 +415,7 @@ function drawTextAreas ()
     }
 }
 
-function changeTextArea(e, srcEl)
+function changeTextArea(e, new_text)
 {
     var children = current_layer.getChildren();
     for (var i = 0; i < children.length; i++)
@@ -390,7 +427,7 @@ function changeTextArea(e, srcEl)
             log(children)
         }
     }
-    drawTextArea(srcEl.value)
+    drawTextArea(new_text)
 }
 
 var CHAR_SCALE_FACTOR = 0.07;
@@ -411,8 +448,8 @@ var sprite_map = [
     {"sel":"-341px -199px", "hov":"-341px -159px", "std":"-341px -119px"}];
 var bg_images = [];
 var layer_array = [];
-var bg_file_names = ['images/bgs/blue.jpg', 'images/bgs/orange.jpg',
-    'images/bgs/purple.jpg', 'images/bgs/green.jpg'];
+var bg_file_names = ['./images/bgs/blue.jpg', './images/bgs/orange.jpg',
+    './images/bgs/purple.jpg', './images/bgs/green.jpg'];
 
 
 window.onload = function(){

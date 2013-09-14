@@ -1,15 +1,12 @@
-microsite-home.jpg provides a final look of the page.
+I can't see any obvious reason why I can't do this but it see
 
-HTML5 canvas specs:
-* Frame with 3 characters standing on the street is a HTML5 canvas. 
-* There are backgrounds on the left from the canvas as well as characters on the bottom. You can drag and drop them to put on the canvas. 
-* You should also be able to move characters after there are placed on the canvas. 
-* Moving character out of the frame should remove it from the canvas
-* There are more than 3 backgrounds and more than 3 characters, so you should be able to slide up and down for backgrounds and right and left for characters (arrows for this are provided in images, even though it is not displayed in microsite-home.jpg)
-* You can enter text into the white frame (MISSION 3 What's the story) and "Add Text" puts the text into black fram
-* Each scene has its own background, set of characters and text, and you can switch between them using panel on the top (SCENE1, SCENE2 etc.)
-* You should be able clear scene. We didn't provide any images for this and there is no indication of where it should be in microsite-home.jpg so it is completely up to you (creativity is very welcomed!)
-* Preview button renders all of 4 scenes to images and displays all of them in just one pop-up window
-
-
-You can use any open-source library which is allowed for commercial use. Canvas should be responsive and it should be working on all modern browsers including IE9+. Links to Home, Gallery and Official site should have only hover on them (no destination).
+    for (var i = 0; i < sprite_map.length; i++)
+    {
+        var scene = 'scene' + i;
+        log(scene);
+        if (getStyle(document.getElementById(scene), 'backgroundPosition') != sprite_map[i].sel)
+        {
+            $('#' + scene).on("mouseover", function (){this.style.backgroundPosition = sprite_map[i].hov;this.style.cursor = 'pointer';});
+            $('#' + scene).on("mouseout", function (){this.style.backgroundPosition = sprite_map[i].std;});
+        }
+    }
